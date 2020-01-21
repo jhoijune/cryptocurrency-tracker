@@ -4,25 +4,30 @@
   "private": true,
   "scripts": {
     "android": "npx react-native run-android",
-    "ios": "npx react-native run-ios",
     "start": "npx react-native start",
     "test": "jest",
     "lint": "eslint .",
+    "map:image": "babel-node ./mapper.js",
     "build": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
     "axios": "^0.19.1",
     "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.6.2",
-    "react-native-screens": "^2.0.0-alpha.25"
+    "react-native-screens": "^2.0.0-alpha.25",
+    "react-navigation": "^4.0.10",
+    "react-navigation-props-mapper": "^1.0.2",
+    "react-navigation-stack": "^2.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/node": "^7.8.3",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",

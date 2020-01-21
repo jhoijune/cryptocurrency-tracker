@@ -1,0 +1,15 @@
+export default {
+  1: require('./1.png'),
+  2: require('./2.png'),
+  52: require('./52.png'),
+  512: require('./512.png'),
+  1027: require('./1027.png'),
+  1321: require('./1321.png'),
+  1684: require('./1684.png'),
+  1765: require('./1765.png'),
+  1831: require('./1831.png'),
+  1958: require('./1958.png'),
+  1975: require('./1975.png'),
+  2010: require('./2010.png'),
+  3602: require('./3602.png'),
+};

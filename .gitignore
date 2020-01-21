@@ -64,3 +64,5 @@ buck-out/
 .prettierrc.js
 babel.config.js
 package-lock.json
+config.js
+.http
