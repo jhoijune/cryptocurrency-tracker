@@ -50,6 +50,14 @@ const HomeScreen = ({navigation: {navigate}}) => {
     fetchData();
   }, []);
 
+  const handlePress = (id) => {
+    return () => {
+      navigate('Detail', {
+        id,
+      });
+    };
+  };
+
   /**
    * item to render in flatlist
    * @param {*} param0
@@ -65,14 +73,21 @@ const HomeScreen = ({navigation: {navigate}}) => {
         price={price}
         dayDiff={dayDiff}
         weekDiff={weekDiff}
+        handlePress={handlePress(id)}
       />
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isLoading && styles.loadingView]}>
       {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.loadingView}>
+          <ActivityIndicator
+            size={75}
+            color="#0000ff"
+            style={[styles.loadingView, {flex: 1}]}
+          />
+        </View>
       ) : (
         <FlatList
           data={data}
@@ -90,6 +105,10 @@ HomeScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {},
+  loadingView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default HomeScreen;

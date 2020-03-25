@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 
 import {colors} from '../theme';
 import images from '../images';
-import {transformMoneyUnit} from '../helper';
+import {transformMoneyUnit} from '../util';
 
 /**
  * Components that outline individual cryptocurrency
@@ -12,50 +12,52 @@ import {transformMoneyUnit} from '../helper';
  */
 
 const Overview = (props) => {
-  const {id, name, symbol, price, dayDiff, weekDiff} = props;
+  const {id, name, symbol, price, dayDiff, weekDiff, handlePress} = props;
   return (
-    <View style={styles.container} onPress={() => {}}>
-      <View style={styles.top}>
-        <View style={styles.topLeft}>
+    <TouchableOpacity onPress={handlePress}>
+      <View style={styles.container}>
+        <View style={styles.top}>
+          <View style={styles.topLeft}>
+            <View>
+              <Image style={styles.image} source={images[id]} />
+            </View>
+            <View style={[styles.row, {padding: 5, paddingLeft: 20}]}>
+              <Text style={[styles.topText, styles.highlightText]}>
+                {`${symbol} | `}
+              </Text>
+              <Text style={styles.topText}>{name}</Text>
+            </View>
+          </View>
           <View>
-            <Image style={styles.image} source={images[id]} />
-          </View>
-          <View style={[styles.row, {padding: 5, paddingLeft: 20}]}>
-            <Text style={[styles.topText, styles.highlightText]}>
-              {`${symbol} | `}
+            <Text style={[styles.topText, styles.highlightText, {padding: 5}]}>
+              {`${transformMoneyUnit(price)} ₩`}
             </Text>
-            <Text style={styles.topText}>{name}</Text>
           </View>
         </View>
-        <View>
-          <Text style={[styles.topText, styles.highlightText, {padding: 5}]}>
-            {`${transformMoneyUnit(price)} ₩`}
-          </Text>
+        <View style={styles.bottom}>
+          <View style={styles.row}>
+            <Text style={styles.bottomText}>24h:</Text>
+            <Text
+              style={[
+                styles.bottomText,
+                styles.highlightText,
+                dayDiff > 0 ? styles.blueText : styles.redText,
+              ]}>
+              {` ${dayDiff} %`}
+            </Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.bottomText}>7d:</Text>
+            <Text
+              style={[
+                styles.bottomText,
+                styles.highlightText,
+                weekDiff > 0 ? styles.blueText : styles.redText,
+              ]}>{` ${weekDiff} %`}</Text>
+          </View>
         </View>
       </View>
-      <View style={styles.bottom}>
-        <View style={styles.row}>
-          <Text style={styles.bottomText}>24h:</Text>
-          <Text
-            style={[
-              styles.bottomText,
-              styles.highlightText,
-              dayDiff > 0 ? styles.blueText : styles.redText,
-            ]}>
-            {` ${dayDiff} %`}
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.bottomText}>7d:</Text>
-          <Text
-            style={[
-              styles.bottomText,
-              styles.highlightText,
-              weekDiff > 0 ? styles.blueText : styles.redText,
-            ]}>{` ${weekDiff} %`}</Text>
-        </View>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -66,6 +68,7 @@ Overview.propTypes = {
   price: PropTypes.number.isRequired,
   dayDiff: PropTypes.number.isRequired,
   weekDiff: PropTypes.number.isRequired,
+  handlePress: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
